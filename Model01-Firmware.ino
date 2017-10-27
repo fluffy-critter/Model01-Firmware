@@ -181,11 +181,12 @@ const Key keymaps[][ROWS][COLS] PROGMEM = {
  *  prints out the firmware build information as virtual keystrokes
  */
 
-static void versionInfoMacro(uint8_t keyState) {
-  if (keyToggledOn(keyState)) {
-    Macros.type(PSTR("Keyboardio Model 01 - Kaleidoscope "));
-    Macros.type(PSTR(BUILD_INFORMATION));
-  }
+static void versionInfoMacro(uint8_t keyState)
+{
+    if (keyToggledOn(keyState)) {
+        Macros.type(PSTR("Keyboardio Model 01 - Kaleidoscope "));
+        Macros.type(PSTR(BUILD_INFORMATION));
+    }
 }
 
 /** anyKeyMacro is used to provide the functionality of the 'Any' key.
@@ -196,13 +197,14 @@ static void versionInfoMacro(uint8_t keyState) {
  *
  */
 
-static void anyKeyMacro(uint8_t keyState) {
-  static Key lastKey;
-  if (keyToggledOn(keyState))
-    lastKey.keyCode = Key_A.keyCode + (uint8_t)(millis() % 36);
+static void anyKeyMacro(uint8_t keyState)
+{
+    static Key lastKey;
+    if (keyToggledOn(keyState))
+    { lastKey.keyCode = Key_A.keyCode + (uint8_t)(millis() % 36); }
 
-  if (keyIsPressed(keyState))
-    kaleidoscope::hid::pressKey(lastKey);
+    if (keyIsPressed(keyState))
+    { kaleidoscope::hid::pressKey(lastKey); }
 }
 
 
@@ -218,18 +220,19 @@ static void anyKeyMacro(uint8_t keyState) {
 
  */
 
-const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
-  switch (macroIndex) {
+const macro_t* macroAction(uint8_t macroIndex, uint8_t keyState)
+{
+    switch (macroIndex) {
 
-  case MACRO_VERSION_INFO:
-    versionInfoMacro(keyState);
-    break;
+    case MACRO_VERSION_INFO:
+        versionInfoMacro(keyState);
+        break;
 
-  case MACRO_ANY:
-    anyKeyMacro(keyState);
-    break;
-  }
-  return MACRO_NONE;
+    case MACRO_ANY:
+        anyKeyMacro(keyState);
+        break;
+    }
+    return MACRO_NONE;
 }
 
 
@@ -254,83 +257,85 @@ static kaleidoscope::LEDSolidColor solidViolet(130, 0, 120);
   * Kaleidoscope and any plugins.
   */
 
-void setup() {
-  // First, call Kaleidoscope's internal setup function
-  Kaleidoscope.setup();
+void setup()
+{
+    // First, call Kaleidoscope's internal setup function
+    Kaleidoscope.setup();
 
-  // Next, tell Kaleidoscope which plugins you want to use.
-  // The order can be important. For example, LED effects are
-  // added in the order they're listed here.
-  Kaleidoscope.use(
-    // The boot greeting effect pulses the LED button for 10 seconds after the keyboard is first connected
-    &BootGreetingEffect,
+    // Next, tell Kaleidoscope which plugins you want to use.
+    // The order can be important. For example, LED effects are
+    // added in the order they're listed here.
+    Kaleidoscope.use(
+        // The boot greeting effect pulses the LED button for 10 seconds after the keyboard is first connected
+        &BootGreetingEffect,
 
-    // The hardware test mode, which can be invoked by tapping Prog, LED and the left Fn button at the same time.
-    &TestMode,
+        // The hardware test mode, which can be invoked by tapping Prog, LED and the left Fn button at the same time.
+        &TestMode,
 
-    // LEDControl provides support for other LED modes
-    &LEDControl,
+        // LEDControl provides support for other LED modes
+        &LEDControl,
 
-    // We start with the LED effect that turns off all the LEDs.
-    &LEDOff,
+        // We start with the LED effect that turns off all the LEDs.
+        &LEDOff,
 
-    // The rainbow effect changes the color of all of the keyboard's keys at the same time
-    // running through all the colors of the rainbow.
-    &LEDRainbowEffect,
+        // The rainbow effect changes the color of all of the keyboard's keys at the same time
+        // running through all the colors of the rainbow.
+        &LEDRainbowEffect,
 
-    // The rainbow wave effect lights up your keyboard with all the colors of a rainbow
-    // and slowly moves the rainbow across your keyboard
-    &LEDRainbowWaveEffect,
+        // The rainbow wave effect lights up your keyboard with all the colors of a rainbow
+        // and slowly moves the rainbow across your keyboard
+        &LEDRainbowWaveEffect,
 
-    // The chase effect follows the adventure of a blue pixel which chases a red pixel across
-    // your keyboard. Spoiler: the blue pixel never catches the red pixel
-    &LEDChaseEffect,
+        // The chase effect follows the adventure of a blue pixel which chases a red pixel across
+        // your keyboard. Spoiler: the blue pixel never catches the red pixel
+        // &LEDChaseEffect,
 
-    // These static effects turn your keyboard's LEDs a variety of colors
-    &solidRed, &solidOrange, &solidYellow, &solidGreen, &solidBlue, &solidIndigo, &solidViolet,
+        // These static effects turn your keyboard's LEDs a variety of colors
+        // &solidRed, &solidOrange, &solidYellow, &solidGreen, &solidBlue, &solidIndigo, &solidViolet,
+        &solidRed, &solidOrange, &solidViolet,
 
-    // The breathe effect slowly pulses all of the LEDs on your keyboard
-    &LEDBreatheEffect,
+        // The breathe effect slowly pulses all of the LEDs on your keyboard
+        // &LEDBreatheEffect,
 
-    // The AlphaSquare effect prints each character you type, using your
-    // keyboard's LEDs as a display
-    &AlphaSquareEffect,
+        // The AlphaSquare effect prints each character you type, using your
+        // keyboard's LEDs as a display
+        // &AlphaSquareEffect,
 
-    // The stalker effect lights up the keys you've pressed recently
-    &StalkerEffect,
+        // The stalker effect lights up the keys you've pressed recently
+        // &StalkerEffect,
 
-    // The numlock plugin is responsible for lighting up the 'numpad' mode
-    // with a custom LED effect
-    &NumLock,
+        // The numlock plugin is responsible for lighting up the 'numpad' mode
+        // with a custom LED effect
+        &NumLock,
 
-    // The macros plugin adds support for macros
-    &Macros,
+        // The macros plugin adds support for macros
+        &Macros,
 
-    // The MouseKeys plugin lets you add keys to your keymap which move the mouse.
-    &MouseKeys
-  );
+        // The MouseKeys plugin lets you add keys to your keymap which move the mouse.
+        &MouseKeys
+    );
 
-  // While we hope to improve this in the future, the NumLock plugin
-  // needs to be explicitly told which keymap layer is your numpad layer
-  NumLock.numPadLayer = NUMPAD;
+    // While we hope to improve this in the future, the NumLock plugin
+    // needs to be explicitly told which keymap layer is your numpad layer
+    NumLock.numPadLayer = NUMPAD;
 
-  // We configure the AlphaSquare effect to use RED letters
-  AlphaSquare.color = { 255, 0, 0 };
+    // We configure the AlphaSquare effect to use RED letters
+    AlphaSquare.color = { 255, 0, 0 };
 
-  // We set the brightness of the rainbow effects to 150 (on a scale of 0-255)
-  // This draws more than 500mA, but looks much nicer than a dimmer effect
-  LEDRainbowEffect.brightness(150);
-  LEDRainbowWaveEffect.brightness(150);
+    // We set the brightness of the rainbow effects to 150 (on a scale of 0-255)
+    // This draws more than 500mA, but looks much nicer than a dimmer effect
+    LEDRainbowEffect.brightness(150);
+    LEDRainbowWaveEffect.brightness(150);
 
-  // The LED Stalker mode has a few effects. The one we like is
-  // called 'BlazingTrail'. For details on other options,
-  // see https://github.com/keyboardio/Kaleidoscope-LED-Stalker
-  StalkerEffect.variant = STALKER(BlazingTrail);
+    // The LED Stalker mode has a few effects. The one we like is
+    // called 'BlazingTrail'. For details on other options,
+    // see https://github.com/keyboardio/Kaleidoscope-LED-Stalker
+    StalkerEffect.variant = STALKER(BlazingTrail);
 
-  // We want to make sure that the firmware starts with LED effects off
-  // This avoids over-taxing devices that don't have a lot of power to share
-  // with USB devices
-  LEDOff.activate();
+    // We want to make sure that the firmware starts with LED effects off
+    // This avoids over-taxing devices that don't have a lot of power to share
+    // with USB devices
+    LEDOff.activate();
 }
 
 /** loop is the second of the standard Arduino sketch functions.
@@ -340,6 +345,7 @@ void setup() {
   * call Kaleidoscope.loop(); and not do anything custom here.
   */
 
-void loop() {
-  Kaleidoscope.loop();
+void loop()
+{
+    Kaleidoscope.loop();
 }
