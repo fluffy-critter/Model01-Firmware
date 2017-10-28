@@ -149,8 +149,8 @@ const Key keymaps[][ROWS][COLS] PROGMEM = {
    ___, Key_Delete, ___, ___,
    ___,
 
-   Consumer_ScanPreviousTrack, Key_F6,                 Key_F7,                   Key_F8,                   Key_F9,          Key_F10,          Key_F11,
-   Consumer_PlaySlashPause,    Consumer_ScanNextTrack, Key_LeftCurlyBracket,     Key_RightCurlyBracket,    Key_LeftBracket, Key_RightBracket, Key_F12,
+   ___,     Key_F6,     Key_F7,                   Key_F8,                   Key_F9,          Key_F10,          Key_F11,
+   ___,     ___,         Key_LeftCurlyBracket,     Key_RightCurlyBracket,    Key_LeftBracket, Key_RightBracket, Key_F12,
                                Key_LeftArrow,          Key_DownArrow,            Key_UpArrow,              Key_RightArrow,  ___,              ___,
    Key_PcApplication,          Key_Mute,               Consumer_VolumeDecrement, Consumer_VolumeIncrement, ___,             Key_Backslash,    Key_Pipe,
    ___, ___, Key_Enter, ___,
@@ -280,7 +280,7 @@ void setup()
 
         // The rainbow effect changes the color of all of the keyboard's keys at the same time
         // running through all the colors of the rainbow.
-        &LEDRainbowEffect,
+        // &LEDRainbowEffect,
 
         // The rainbow wave effect lights up your keyboard with all the colors of a rainbow
         // and slowly moves the rainbow across your keyboard
@@ -291,8 +291,13 @@ void setup()
         // &LEDChaseEffect,
 
         // These static effects turn your keyboard's LEDs a variety of colors
-        // &solidRed, &solidOrange, &solidYellow, &solidGreen, &solidBlue, &solidIndigo, &solidViolet,
-        &solidRed, &solidOrange, &solidViolet,
+        &solidRed,
+        // &solidOrange,
+        &solidYellow,
+        &solidGreen,
+        &solidBlue,
+        // &solidIndigo,
+        &solidViolet,
 
         // The breathe effect slowly pulses all of the LEDs on your keyboard
         // &LEDBreatheEffect,
